@@ -11,16 +11,15 @@ class Logger {
     LogLevel level;
 
 public:
-   
+    // Constructor with shared LogFile
     Logger(std::shared_ptr<LogFile> lf);
 
-    // Change logging level
     void setLevel(LogLevel lvl);
 
-    
+    // Log message using string_view (non-owning)
     void logMessage(LogLevel lvl, std::string_view msg);
 
-   
+    // Log message with full copy
     void logMessage(LogLevel lvl, const std::string& msg);
 
     void logInfo(std::string_view msg);

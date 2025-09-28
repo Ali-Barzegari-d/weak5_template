@@ -1,6 +1,7 @@
 #include "SafeArray.hpp"
 
-// For exercise purposes, implement them here and rely on explicit instantiation below.
+// NOTE: Template definitions usually must be in header.
+// Here we implement them in cpp for exercise purposes.
 
 template <typename T>
 SafeArray<T>::SafeArray() = default;
@@ -10,26 +11,33 @@ SafeArray<T>::~SafeArray() noexcept = default;
 
 template <typename T>
 void SafeArray<T>::push_back(const T& value) {
-    // TODO: implement push_back (std::vector already gives strong guarantee)
+    // std::vector already provides strong exception guarantee
     data.push_back(value);
 }
 
 template <typename T>
 T& SafeArray<T>::at_exception(std::size_t idx) {
-    // TODO: check bounds, throw if invalid
-    return data[0]; // placeholder
+    if (idx >= data.size()) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    return data[idx];
 }
 
 template <typename T>
 const T& SafeArray<T>::at_exception(std::size_t idx) const {
-    // TODO: check bounds, throw if invalid
-    return data[0]; // placeholder
+    if (idx >= data.size()) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    return data[idx];
 }
 
 template <typename T>
 ErrorCode SafeArray<T>::at_status(std::size_t idx, T& out) const {
-    // TODO: check bounds, return SUCCESS or OUT_OF_BOUNDS
-    return ErrorCode::SUCCESS; // placeholder
+    if (idx >= data.size()) {
+        return ErrorCode::OUT_OF_BOUNDS;
+    }
+    out = data[idx];
+    return ErrorCode::SUCCESS;
 }
 
 template <typename T>
