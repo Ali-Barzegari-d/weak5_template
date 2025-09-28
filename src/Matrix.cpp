@@ -1,6 +1,5 @@
 #include "Matrix.hpp"
 
-// NOTE: Template definitions usually go in header.
 // For this exercise, implement here and explicitly instantiate common types.
 
 template <typename T>
