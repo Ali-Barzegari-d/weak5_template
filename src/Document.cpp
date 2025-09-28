@@ -1,21 +1,31 @@
 #include "Document.hpp"
-#include <iostream>
 
-// TODO: Implement constructor from string (copy)
+// Constructor: copy content
+Document::Document(const std::string& n, const std::string& text)
+    : name(n), content(std::make_unique<std::string>(text)), view(*content) {}
 
-// TODO: Implement constructor from string& (view)
+// Constructor: view-only
+Document::Document(const std::string& n, const std::string& external, bool)
+    : name(n), content(nullptr), view(external) {}
 
-// TODO: Implement constructor from unique_ptr (ownership)
+// Constructor: unique_ptr ownership
+Document::Document(const std::string& n, std::unique_ptr<std::string> ptr)
+    : name(n), content(std::move(ptr)), view(*content) {}
 
 const std::string& Document::getName() const {
     return name;
 }
 
 std::string_view Document::getView() const {
-    // TODO: Return owned content if available, otherwise view
-    return {};
+    if (content) return *content;
+    return view;
 }
 
 void Document::updateContent(const std::string& newContent) {
-    // TODO: Update only if content is owned (unique_ptr not null)
+    if (content) {
+        *content = newContent;
+        view = *content;
+    } else {
+        std::cerr << "Cannot update content: Document is view-only\n";
+    }
 }

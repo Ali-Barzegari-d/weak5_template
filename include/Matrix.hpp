@@ -23,7 +23,7 @@ public:
 
     template <typename U>
     auto operator+(const Matrix<U> &other) const
-        -> Matrix</* TODO: use decltype(...) here */>;
+        -> Matrix<decltype(std::declval<T>() + std::declval<U>())>;
 
     void print() const;
 };

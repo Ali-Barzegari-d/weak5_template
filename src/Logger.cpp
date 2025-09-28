@@ -1,28 +1,38 @@
 #include "Logger.hpp"
 #include <iostream>
 
-// TODO: Implement constructor
+Logger::Logger(std::shared_ptr<LogFile> lf)
+    : logfile(std::move(lf)), level(LogLevel::INFO) {}
 
 void Logger::setLevel(LogLevel lvl) {
     level = lvl;
 }
 
 void Logger::logMessage(LogLevel lvl, std::string_view msg) {
-    // TODO: Implement logging using string_view
+    if (lvl < level) return;
+
+    std::string prefix;
+    switch (lvl) {
+        case LogLevel::INFO: prefix = "[INFO] "; break;
+        case LogLevel::WARNING: prefix = "[WARNING] "; break;
+        case LogLevel::ERROR: prefix = "[ERROR] "; break;
+    }
+
+    logfile->write(prefix + std::string(msg));
 }
 
 void Logger::logMessage(LogLevel lvl, const std::string& msg) {
-    // TODO: Call string_view version
+    logMessage(lvl, std::string_view(msg));
 }
 
 void Logger::logInfo(std::string_view msg) {
-    // TODO: Call logMessage with INFO
+    logMessage(LogLevel::INFO, msg);
 }
 
 void Logger::logWarning(std::string_view msg) {
-    // TODO: Call logMessage with WARNING
+    logMessage(LogLevel::WARNING, msg);
 }
 
 void Logger::logError(std::string_view msg) {
-    // TODO: Call logMessage with ERROR
+    logMessage(LogLevel::ERROR, msg);
 }

@@ -11,16 +11,10 @@ class Logger {
     LogLevel level;
 
 public:
-   
     Logger(std::shared_ptr<LogFile> lf);
 
-    // Change logging level
     void setLevel(LogLevel lvl);
-
-    
     void logMessage(LogLevel lvl, std::string_view msg);
-
-   
     void logMessage(LogLevel lvl, const std::string& msg);
 
     void logInfo(std::string_view msg);

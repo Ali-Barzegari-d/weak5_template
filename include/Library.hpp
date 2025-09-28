@@ -11,8 +11,6 @@ class Library
 
 public:
     void addDocument(std::shared_ptr<Document> doc);
-
     std::optional<std::shared_ptr<Document>> findByName(const std::string &name);
-
     void printAll() const;
 };

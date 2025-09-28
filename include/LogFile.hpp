@@ -8,8 +8,6 @@ class LogFile
 
 public:
     explicit LogFile(const std::string &filename);
-
     ~LogFile();
-
     void write(const std::string &msg);
 };
