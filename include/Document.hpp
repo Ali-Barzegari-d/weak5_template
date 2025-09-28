@@ -3,22 +3,19 @@
 #include <string_view>
 #include <memory>
 #include <iostream>
-class Document
-{
+
+class Document {
     std::string name;
-    std::unique_ptr<std::string> content;
-    std::string_view view;
+    std::unique_ptr<std::string> content; // owned content
+    std::string_view view;                // view content
 
 public:
-    // TODO: Implement constructors
-    // 1. From string (copy content)
-    // 2. From external string& as view
-    // 3. From unique_ptr for exclusive ownership
+    // Constructors
+    Document(const std::string& n, const std::string& text);            // copy
+    Document(const std::string& n, const std::string& external, bool viewOnly); // view
+    Document(const std::string& n, std::unique_ptr<std::string> ptr);   // ownership
 
-    const std::string &getName() const;
-
-    // Return either owned string content or view
+    const std::string& getName() const;
     std::string_view getView() const;
-
-    void updateContent(const std::string &newContent);
+    void updateContent(const std::string& newContent);
 };

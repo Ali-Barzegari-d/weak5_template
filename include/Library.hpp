@@ -5,14 +5,11 @@
 #include <optional>
 #include <iostream>
 
-class Library
-{
+class Library {
     std::vector<std::shared_ptr<Document>> docs;
 
 public:
     void addDocument(std::shared_ptr<Document> doc);
-
-    std::optional<std::shared_ptr<Document>> findByName(const std::string &name);
-
+    std::optional<std::shared_ptr<Document>> findByName(const std::string& name);
     void printAll() const;
 };

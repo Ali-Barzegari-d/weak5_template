@@ -2,14 +2,16 @@
 #include <fstream>
 #include <string>
 
-class LogFile
-{
+class LogFile {
     std::ofstream file;
 
 public:
-    explicit LogFile(const std::string &filename);
+    // Constructor opens file with RAII
+    explicit LogFile(const std::string& filename);
 
+    // Destructor closes file automatically
     ~LogFile();
 
-    void write(const std::string &msg);
+    // Write a line to file
+    void write(const std::string& msg);
 };
