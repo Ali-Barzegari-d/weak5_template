@@ -1,5 +1,6 @@
 #include "LogFile.hpp"
 #include <iostream>
+#include <stdexcept>
 
 // TODO: Implement constructor (open file)
 
