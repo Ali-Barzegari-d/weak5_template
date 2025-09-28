@@ -37,5 +37,15 @@ add_executable(matrix_tests tests/Matrix_tests.cpp)
 target_link_libraries(matrix_tests PRIVATE matrix_lib)
 add_test(NAME matrix_tests COMMAND $<TARGET_FILE:matrix_tests>)
 
+# === Task D: SafeArray ===
+add_library(SafeArray_lib
+    src/SafeArray.cpp
+)
+target_include_directories(SafeArray_lib PUBLIC include)
+
+add_executable(SafeArray_tests tests/SafeArray_tests.cpp)
+target_link_libraries(SafeArray_tests PRIVATE SafeArray_lib)
+add_test(NAME SafeArray_tests COMMAND $<TARGET_FILE:SafeArray_tests>)
+
 # === Enable CTest ===
 include(CTest)
